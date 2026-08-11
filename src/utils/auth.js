@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://se-project-express-o2tk.onrender.com';
 
 function checkResponse(res) {
   if (res.ok) return res.json();
