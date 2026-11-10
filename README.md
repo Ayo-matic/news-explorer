@@ -1,16 +1,47 @@
-# React + Vite
+# NewsExplorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A React app for finding news on any topic and saving the articles you want to keep.
 
-Currently, two official plugins are available:
+Search results come from [News API](https://newsapi.org/). Accounts and saved articles are handled by my own Express/MongoDB API, [se_project_express](https://github.com/Ayo-matic/se_project_express).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This is my final project for the TripleTen Software Engineering program.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Keyword search**: finds English-language articles from the last 30 days, newest first.
+- **Show more**: results appear three at a time, with a button to load the next three.
+- **Loading, empty, and error states**: a preloader while the request runs, a "Nothing found" message when nothing matches, and an error message if the request fails.
+- **Accounts**: sign up and sign in through modal forms with HTML5 validation. The JWT is stored in `localStorage`, so the session is restored on page load.
+- **Saved articles**: signed-in users can bookmark and un-bookmark articles. Each saved article keeps the keyword it was found with.
+- **Protected route**: `/saved-news` redirects to the home page unless the user is signed in.
+- **Responsive layout** with a mobile navigation menu.
 
-## Expanding the Oxlint configuration
+## Tech
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- React 19 (function components and hooks, including a custom `useFormAndValidation` hook)
+- React Router 7
+- Vite 8
+- Plain CSS with BEM class names, one stylesheet per component
+- Fetch API for News API and the backend
+- Oxlint for linting
+
+## Backend
+
+The app uses the [se_project_express](https://github.com/Ayo-matic/se_project_express) API for:
+
+- `POST /signup` and `POST /signin`: registration and login (JWT)
+- `GET /users/me`: the current user
+- `GET /articles`, `POST /articles`, and `DELETE /articles/:articleId`: saved articles
+
+The API base URL is set in `src/utils/auth.js` and `src/utils/articlesApi.js`.
+
+## Getting started
+
+1. Get a free API key from [newsapi.org](https://newsapi.org/).
+2. Copy `.env.example` to `.env` and set `VITE_NEWS_API_KEY` to your key.
+3. Install the dependencies and start the dev server:
+
+   ```bash
+   npm install
+   npm run dev
+   ```
