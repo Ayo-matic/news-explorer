@@ -35,10 +35,23 @@ function Header({ isLoggedIn, userName, onSignInClick, onSignOutClick }) {
         </button>
 
         <nav className={`header__nav ${isMenuOpen ? 'header__nav_open' : ''}`}>
-          <Link to="/" className="header__nav-link header__nav-link_active" onClick={closeMenu}>Home</Link>
+          {/* The underline follows the current page instead of always sitting on Home */}
+          <Link
+            to="/"
+            className={`header__nav-link ${isSavedNewsPage ? '' : 'header__nav-link_active'}`}
+            onClick={closeMenu}
+          >
+            Home
+          </Link>
 
           {isLoggedIn && (
-            <Link to="/saved-news" className="header__nav-link" onClick={closeMenu}>Saved articles</Link>
+            <Link
+              to="/saved-news"
+              className={`header__nav-link ${isSavedNewsPage ? 'header__nav-link_active' : ''}`}
+              onClick={closeMenu}
+            >
+              Saved articles
+            </Link>
           )}
 
           {isLoggedIn ? (
