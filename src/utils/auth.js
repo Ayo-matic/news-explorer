@@ -1,4 +1,8 @@
-const BASE_URL = 'https://se-project-express-o2tk.onrender.com';
+// The deployed build (import.meta.env.PROD is true after `vite build`) uses
+// the live API on the Google Cloud VM; `npm run dev` uses the local server.
+const BASE_URL = import.meta.env.PROD
+  ? 'https://ayomatic.duckdns.org'
+  : 'http://localhost:3001';
 
 function checkResponse(res) {
   if (res.ok) return res.json();

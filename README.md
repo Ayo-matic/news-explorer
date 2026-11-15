@@ -6,6 +6,10 @@ Search results come from [News API](https://newsapi.org/). Accounts and saved ar
 
 This is my final project for the TripleTen Software Engineering program.
 
+## Live demo
+
+[ayomatic-news-explorer.vercel.app](https://ayomatic-news-explorer.vercel.app)
+
 ## Features
 
 - **Keyword search**: finds English-language articles from the last 30 days, newest first.
@@ -33,7 +37,15 @@ The app uses the [se_project_express](https://github.com/Ayo-matic/se_project_ex
 - `GET /users/me`: the current user
 - `GET /articles`, `POST /articles`, and `DELETE /articles/:articleId`: saved articles
 
-The API base URL is set in `src/utils/auth.js` and `src/utils/articlesApi.js`.
+The API base URL is set in `src/utils/auth.js` and `src/utils/articlesApi.js`: the deployed build uses the live API at `https://ayomatic.duckdns.org`, and `npm run dev` uses `http://localhost:3001`.
+
+## Deployment
+
+The app is hosted on Vercel and redeploys automatically on every push to `main`.
+
+- `VITE_NEWS_API_KEY` is set as an environment variable in the Vercel project settings.
+- The free News API plan only answers browser requests from `localhost`, so the deployed build sends searches through TripleTen's proxy (`https://nomoreparties.co/news/v2`). The switch is in `src/utils/NewsApi.js`.
+- `vercel.json` rewrites every path to `index.html` so `/saved-news` still loads after a refresh.
 
 ## Getting started
 
